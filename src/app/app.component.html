@@ -1,3 +1,34 @@
 <h1>
   {{title}}
 </h1>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div>
+    <label for="name">Nome</label>
+    <input type="text" formControlName="name" required>
+  </div>
+
+  <div>
+    <label for="address">E-mail</label>
+    <input type="email" formControlName="address">
+  </div>
+
+  <div>
+    <label for="grossSalary">Salário</label>
+    <input type="number" formControlName="grossSalary">
+  </div>
+
+  <button type="reset" (click)="reset()">Limpar</button>
+  <button type="submit">Calcular</button>
+</form>
+
+<ul *ngIf="errors.length > 0">
+  <li *ngFor="let error of errors">{{ error.message }}</li>
+</ul>
+
+<div *ngIf="success == true">
+  <h2> Nome: {{name}} </h2>
+  <h2> Salário Bruto: R$ {{grossSalary}} </h2>
+  <h2> Faixa de imposto: {{tax}} % </h2>
+  <h2> Salário Líquido: R$ {{netSalary}} </h2>
+</div>
